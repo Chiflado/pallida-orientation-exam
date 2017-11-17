@@ -1,6 +1,6 @@
 'use strict';
 
-function doRequest(callback, url){
+function doRequest(config){
     let xhr = new XMLHttpRequest();
     xhr.open(config.method, config.url);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -11,3 +11,12 @@ function doRequest(callback, url){
     };
     xhr.send(config.data);
 };
+
+
+let Config = {
+    method : 'GET',
+    url : '/search/audi',
+    callback : createTable,
+    data : null
+}
+doRequest(Config);

@@ -3,7 +3,7 @@
 function createTable(object){
     let table = document.createElement('table');
     document.querySelector('body').appendChild(table);
-    for (let i = 0; i<object.length; i++){
+    for (let i = 0; i<object.data.length; i++){
         let postElements =`<td>${object.data[i].plate}</td>
                            <td>${object.data[i].car_brand}</td>
                            <td>${object.data[i].car_model}</td>
