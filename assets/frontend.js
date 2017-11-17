@@ -1,13 +1,16 @@
 'use strict';
 
-function doRequest(config){
-    let xhr = new XMLHttpRequest();
-    xhr.open(config.method, config.url);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function(){
-        config.data = JSON.parse(xhr.responseText);
-        console.log(config);
-        config.callback(config);
-    };
-    xhr.send(config.data);
-}
+function createTable(object){
+    let table = document.createElement('table');
+    document.querySelector('body').appendChild(table);
+    for (let i = 0; i<object.length; i++){
+        let postElements =`<td>${object.data[i].plate}</td>
+                           <td>${object.data[i].car_brand}</td>
+                           <td>${object.data[i].car_model}</td>
+                           <td>${object.data[i].color}</td>
+                           <td>${object.data[i].year}</td>`;
+        let bookDatas = document.createElement('tr');
+        bookDatas.innerHTML = postElements;
+        table.appendChild(bookDatas);
+    }
+};
