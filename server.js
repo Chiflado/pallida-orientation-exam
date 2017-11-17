@@ -27,7 +27,7 @@ app.get('/search', function (req, res){
         res.json({error : 'Please provide a licence plate number!'});
     } else if(param){
        connection.query(`SELECT * FROM licence_plates
-                         WHERE plate = "${req.query.q}";`, function(err,data){
+                         WHERE plate LIKE "%${req.query.q}%";`, function(err,data){
                              if(err){
                                 res.json({error : err.toString()})
                              } else{
