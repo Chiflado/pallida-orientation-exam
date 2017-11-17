@@ -4,6 +4,9 @@ let plateSearchBtn = document.querySelector('.lp_search');
 let plateSearch = document.querySelector('.licence_plate');
 let brandSearchBtn = document.querySelector('.brand_search');
 let brandSearch = document.querySelector('.brand');
+let policeButton = document.querySelector('.police');
+let diplomatButton = document.querySelector('.diplomats');
+let radioButtons = document.querySelector('.button');
 
 function createTable(object){
     let table = document.createElement('table');
@@ -28,7 +31,12 @@ function getLicencePlate(){
             callback : createTable,
             data : null
         }
-        doRequest(licencePlateConfig);
+        if(policeButton.checked){
+            licencePlateConfig.url +='&police=1';
+            doRequest(licencePlateConfig);
+        }else {
+            doRequest(licencePlateConfig);
+        }
     })
 }
 
@@ -43,6 +51,7 @@ function getBrand(){
         doRequest(brandConfig);
     })
 }
+
 
 
 getLicencePlate();
