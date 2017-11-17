@@ -2,6 +2,8 @@
 
 let plateSearchBtn = document.querySelector('.lp_search');
 let plateSearch = document.querySelector('.licence_plate');
+let brandSearchBtn = document.querySelector('.brand_search');
+let brandSearch = document.querySelector('.brand');
 
 function createTable(object){
     let table = document.createElement('table');
@@ -30,4 +32,18 @@ function getLicencePlate(){
     })
 }
 
+function getBrand(){
+    brandSearchBtn.addEventListener('click', function(event){
+        let brandConfig = {
+            method : 'GET',
+            url : '/search/'+brandSearch.value,
+            callback : createTable,
+            data : null
+        }
+        doRequest(brandConfig);
+    })
+}
+
+
 getLicencePlate();
+getBrand();
