@@ -20,7 +20,19 @@ app.use(express.json());
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');    
 });
-    
+
+app.get('/search', function (req, res){
+    var param = req.query.q;
+    if(param === undefined){
+        res.json({error : 'Please provide a licence plate number!'});
+    } else if(isAlphaNumeric(param)){
+       connection.query(`SELECT * FROM licence_plates
+                         WHERE plate = "${req.query.q}";`, function(err,data){ 
+                            res.json(data);
+                         });
+    }
+})
+
 connection.connect(function(err){
     if(err){
       console.log("Error connecting to Db");
@@ -30,4 +42,4 @@ connection.connect(function(err){
   });
   
 app.listen(port);
-console.log('The server is running at http://localhost:'+port+'/');
+console.log('The server is running at http:ocalhost:'+port+'/');
