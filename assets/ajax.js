@@ -6,17 +6,8 @@ function doRequest(config){
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function(){
         config.data = JSON.parse(xhr.responseText);
-        console.log(config);
+        console.log(JSON.parse(xhr.responseText));
         config.callback(config);
     };
     xhr.send(config.data);
 };
-
-
-let Config = {
-    method : 'GET',
-    url : '/search/audi',
-    callback : createTable,
-    data : null
-}
-doRequest(Config);

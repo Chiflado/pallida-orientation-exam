@@ -1,5 +1,8 @@
 'use strict';
 
+let plateSearchBtn = document.querySelector('.lp_search');
+let plateSearch = document.querySelector('.licence_plate');
+
 function createTable(object){
     let table = document.createElement('table');
     document.querySelector('body').appendChild(table);
@@ -14,3 +17,17 @@ function createTable(object){
         table.appendChild(bookDatas);
     }
 };
+
+function getLicencePlate(){
+    plateSearchBtn.addEventListener('click', function(event){
+        let licencePlateConfig = {
+            method : 'GET',
+            url : '/search/?q='+plateSearch.value,
+            callback : createTable,
+            data : null
+        }
+        doRequest(licencePlateConfig);
+    })
+}
+
+getLicencePlate();
