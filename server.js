@@ -25,12 +25,27 @@ app.get('/search', function (req, res){
     var param = req.query.q;
     if(param === undefined){
         res.json({error : 'Please provide a licence plate number!'});
-    } else if(isAlphaNumeric(param)){
+    } else if(param){
        connection.query(`SELECT * FROM licence_plates
-                         WHERE plate = "${req.query.q}";`, function(err,data){ 
-                            res.json(data);
+                         WHERE plate = "${req.query.q}";`, function(err,data){
+                             if(err){
+                                res.json({error : err.toString()})
+                             } else{
+                                res.json(data);
+                             }
                          });
     }
+});
+
+app.get('/search/:brand', function (req, res){
+    connection.query(`SELECT * FROM licence_plates
+    WHERE car_brand = "${req.params.brand}";`, function(err,data){
+        if(err){
+            res.json({error : err.toString()})
+        } else{
+            res.json(data)
+        } 
+    });
 })
 
 connection.connect(function(err){
